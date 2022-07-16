@@ -1,8 +1,28 @@
-<table class="table table-info text-dark table-bordered w-50 mx-auto text-center">
-  <tr *ngFor="let product of products">
-    <td>{{ product.productId }}</td>
-    <td>{{ product.productName }}</td>
-    <td>{{ product.categoryId }}</td>
-    <td>{{ product.unitPrice }}</td>
-  </tr>
+<div
+  *ngIf="dataLoaded == false"
+  class="spinner-grow d-block mx-auto"
+  role="status"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<table class="table table-striped table-hover text-center mt-4">
+  <thead class="table-info" *ngIf="dataLoaded != false">
+    <tr>
+      <th>PRODUCT ID</th>
+      <th>CATEGORY ID</th>
+      <th>PRODUCT NAME</th>
+      <th>UNIT PRICE</th>
+      <th>UNITS IN STOCK</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <tr *ngFor="let product of products">
+      <td>{{ product.productId }}</td>
+      <td>{{ product.productName }}</td>
+      <td>{{ product.categoryId }}</td>
+      <td>{{ product.unitPrice }}</td>
+      <td>{{ product.unitsInStock }}</td>
+    </tr>
+  </tbody>
 </table>
