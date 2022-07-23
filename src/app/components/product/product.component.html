@@ -6,23 +6,53 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 
+<div class="mb-3">
+  <label for="filterText" class="form-label">Search Product</label>
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="enter some product name"
+  />
+</div>
+<div
+  *ngIf="filterText && filterText.length > 0"
+  class="alert alert-success"
+  role="alert"
+>
+  {{ filterText }} aradınız.
+</div>
+
 <table class="table table-striped table-hover text-center mt-4">
-  <thead class="table-info" *ngIf="dataLoaded != false">
+  <thead class="table-info" *ngIf="dataLoaded == true">
     <tr>
       <th>PRODUCT ID</th>
       <th>CATEGORY ID</th>
       <th>PRODUCT NAME</th>
       <th>UNIT PRICE</th>
+      <th>PRICE W' VAT</th>
       <th>UNITS IN STOCK</th>
+      <th></th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <tr *ngFor="let product of products">
+    <tr *ngFor="let product of products | filterPipe: filterText">
       <td>{{ product.productId }}</td>
       <td>{{ product.categoryId }}</td>
-      <td>{{ product.productName }}</td>
-      <td>{{ product.unitPrice }}</td>
+      <td>{{ product.productName | uppercase }}</td>
+      <td>{{ product.unitPrice | currency }}</td>
+      <td>{{ product.unitPrice | vatAdded: 18 | currency }}</td>
       <td>{{ product.unitsInStock }}</td>
+      <td>
+        <button
+          (click)="addToCart(product)"
+          class="btn btn-success btn-sm"
+          type="button"
+        >
+          Add to Cart
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

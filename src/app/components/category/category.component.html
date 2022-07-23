@@ -1,13 +1,12 @@
-<ul class="list-group mt-4 categories-list">
-  <li [class]="getAllCategoryClass()" routerLink="/products">TÜM ÜRÜNLER</li>
+<ul class="list-group mt-4 categories-list text-center">
+  <li [class]="getAllCategoryClass()" routerLink="/products">ALL PRODUCTS</li>
   <li
     (click)="setCurrentCategory(category)"
     routerLink="/products/category/{{ category.categoryId }}"
     [class]="getCurrentCategoryClass(category)"
     *ngFor="let category of categories"
   >
-    {{ category.categoryId }} - {{ category.categoryName }}
+    {{ category.categoryName }}
   </li>
 </ul>
 
-<h5 *ngIf="currentCategory">{{ currentCategory.categoryName }} seçtiniz.</h5>

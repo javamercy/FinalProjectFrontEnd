@@ -13,14 +13,14 @@ export class ProductService {
   constructor(private httpClient: HttpClient) {}
 
   getProducts(): Observable<ListResponseModel<Product>> {
-    let newPath = `${this.apiUrl}products/getall`;
+    let newPath: string = `${this.apiUrl}products/getall`;
     return this.httpClient.get<ListResponseModel<Product>>(newPath);
   }
 
   getProductsByCategory(
     categoryId: number
   ): Observable<ListResponseModel<Product>> {
-    let newPath = `${this.apiUrl}products/getallbycategoryid?categoryid=${categoryId}`;
+    let newPath: string = `${this.apiUrl}products/getallbycategoryid?categoryid=${categoryId}`;
     return this.httpClient.get<ListResponseModel<Product>>(newPath);
   }
 }
